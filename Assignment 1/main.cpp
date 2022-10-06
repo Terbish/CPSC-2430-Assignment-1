@@ -4,8 +4,10 @@
 
 using namespace std;
 
+//void Init();
 
 int main() {
-    Init();
+    Shelter *newShelter = new Shelter;
+    newShelter->Init();
     return 0;
 }
