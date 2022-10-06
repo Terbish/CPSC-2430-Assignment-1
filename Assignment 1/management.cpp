@@ -48,7 +48,6 @@ void Shelter::getAnimal() {
         if (Dogs.empty())   // check if Dogs queue is empty
         {
             cout << "I'm sorry, there are no dogs available to be adopted.\n";  // error 
-            cout << footer;
             return getAnimal(); // return to adopt animal menu
         }
         else // if Dog queue is not empty
@@ -62,7 +61,6 @@ void Shelter::getAnimal() {
         if (Cats.empty())   // check if Cats queue is empty
         {
             cout << "I'm sorry, there are no cats available to be adopted.\n";  // error
-            cout << footer;
             return getAnimal(); // return to adopt animal menu
 
         }

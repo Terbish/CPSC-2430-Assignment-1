@@ -18,7 +18,7 @@ void menu() {
     string footer = "===============================================================================================\n";
     cout << header;
     cout << "\t\t\t\tWhat would you like to do?\n"
-        "\tPress 1 to leave your animal at the shelter\tPress 2 to adopt an animal\n\tPress 3 to access animal lists\t\t\tPress 0 to exit\n";
+        "\tPress 1 to leave your animal at the shelter\tPress 2 to adopt an animal\n\t\t\t\tPress 0 to exit\n";
     cin >> input;
 
     // if user wants to deposit an animal
