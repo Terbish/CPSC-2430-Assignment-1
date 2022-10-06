@@ -27,6 +27,17 @@ void Shelter::addAnimal() {
 
             
     }
+    cout << "\tWould you like to deposite more animals?\n"
+        "\t\t1.YES\t\t\t\t2.NO\n";
+    cin >> input;
+    if (input == 1)
+    {
+        return addAnimal();
+    }
+    else if (input == 2)
+    {
+        return Init();
+    }
 }
 
 void Shelter::getAnimal() {
@@ -99,7 +110,8 @@ void Shelter::Init() {
 
     //spalshScreen();
     cout << header;
-    cout << "What would you like to do?\n" << "\tPress 1 to leave your animal at the shelter\tPress 2 to adopt an animal\n\tPress 3 to access animal lists\t\t\tPress 0 to exit\n";
+    cout << "\t\t\t\tWhat would you like to do?\n"
+        "\tPress 1 to leave your animal at the shelter\tPress 2 to adopt an animal\n\tPress 3 to access animal lists\t\t\tPress 0 to exit\n";
     cin >> input;
 
     if (input == 1)
