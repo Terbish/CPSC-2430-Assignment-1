@@ -21,22 +21,22 @@ void menu() {
         "\tPress 1 to leave your animal at the shelter\tPress 2 to adopt an animal\n\tPress 3 to access animal lists\t\t\tPress 0 to exit\n";
     cin >> input;
 
-    // if 
+    // if user wants to deposit an animal
     if (input == 1)
     {
-        newShelter.addAnimal();
+        newShelter.addAnimal(); // call the addAnimal() function
         cout << footer;
-        return menu();
+        return menu();  // return to the menu at the end
     }
-    else if (input == 2)
+    else if (input == 2)    // if user wants to adopt an animal
     {
-        if (newShelter.Dogs.empty() && newShelter.Cats.empty())
+        if (newShelter.Dogs.empty() && newShelter.Cats.empty()) // check if Dogs, Cats queues are empty
         {
-            cout << "Unfortunately there are no animal up for adoption at this moment, please come back later.\n";
+            cout << "Unfortunately there are no animal up for adoption at this moment, please come back later.\n";  // error
             cout << footer;
-            return menu();
+            return menu(); // return to menu
         }
-        else
+        else // if queues are not empty, proceed with getAnimal()
         {
             newShelter.getAnimal();
             cout << footer;
@@ -44,7 +44,7 @@ void menu() {
         }
 
     }
-    else if (input == 0)
+    else if (input == 0) // quit the program
     {
         cout << "Thank you for visiting the shleter, we hope to see you again.\n";
         exit(0);
