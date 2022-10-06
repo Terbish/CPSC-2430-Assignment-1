@@ -15,21 +15,12 @@ public:
 	queue<int> priority;	// adpot priority based on first come first serve order
 
 	int input;
-	string animalName;
+	string animalName, adoptionMessage;
 
 	void addAnimal(); // add an animal
 	void getAnimal(); // retrieve an animal
-	void Init();	// menu
-	void getAnimalList();	// get either list of animals
-	bool ERROR_CATCHING(const string& s);	// error handling
-	void spalshScreen();	// splashscreen
-};
-
-class Admin
-{
-public:
-	void duplicateList();
-
+	void getDog();	// retrieve first dog
+	void getCat();	// retrieve first cat
 };
 #endif
 

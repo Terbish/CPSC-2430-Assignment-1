@@ -5,98 +5,83 @@
 using namespace std;
    
 string footer = "===============================================================================================\n";
+string adoptionMessage = "Congratulation, you are now the proud parent of: ";
 
 void Shelter::addAnimal() {
+    // asking for user input
     cout << "Please enter the name of your animal:\n";
     cin >> animalName;
     cout << "Is it a dog or a cat? (Enter 1 for Dogs, 2 for Cats)\n";
     cin >> input;
 
+    // if user user is depositing a dog
     if (input == 1)
     {
-        Dogs.push(animalName);
-        priority.push(1);
+        Dogs.push(animalName);  // push the name of the animal to the Dogs queue
+        priority.push(1);   // push identifier 1 to the priority queue
         cout << animalName << " has been added to the list of dogs.\n";
 
     }
-    else if (input == 2)
+    else if (input == 2)    // if user is depositing a cat
     {
-        Cats.push(animalName);
-        priority.push(2);
+        Cats.push(animalName);  // push the name of the cat to the Cats queue
+        priority.push(2);   // push identifier 2 to the priority queue
         cout << animalName << " has been added to the list of cats.\n";
 
             
     }
-    cout << "\tWould you like to deposite more animals?\n"
+    cout << "\tWould you like to deposite more animals?\n"  // prompt if the user want to continue deposition or quit
         "\t\t1.YES\t\t\t\t2.NO\n";
     cin >> input;
-    if (input == 1)
+    if (input == 1) // if continue to deposit 
     {
         return addAnimal();
-    }
-    else if (input == 2)
-    {
-        return Init();
     }
 }
 
 void Shelter::getAnimal() {
-    string congrats = "Congratulation, you are now the proud parent of: ";
     cout << "Would you like a dog or a cat?\nPlease enter 1 for dog, 2 for cat, and 3 for either. Press 0 to return to menu.\n";
     cin >> input;
 
-    if (input == 1)
+    if (input == 1) // if the user wants to adopt a dog
     {
-        if (Dogs.empty())
+        if (Dogs.empty())   // check if Dogs queue is empty
         {
-            cout << "I'm sorry, there are no dogs available to be adopted.\n";
+            cout << "I'm sorry, there are no dogs available to be adopted.\n";  // error 
             cout << footer;
-            return getAnimal();
+            return getAnimal(); // return to adopt animal menu
         }
-        else
+        else // if Dog queue is not empty
         {
-            cout << congrats << Dogs.front() << "\n";
-            cout << footer;
-            Dogs.pop();
-            return Init();
+            getDog();
         }
 
     }
     else if (input == 2)
     {
-        if (Cats.empty())
+        if (Cats.empty())   // check if Cats queue is empty
         {
-            cout << "I'm sorry, there are no cats available to be adopted.\n";
+            cout << "I'm sorry, there are no cats available to be adopted.\n";  // error
             cout << footer;
-            return getAnimal();
+            return getAnimal(); // return to adopt animal menu
 
         }
-        else
+        else    // if Cats is not empty
         {
-            cout << congrats << Cats.front() << "\n" << footer;
-            cout << footer;
-            Cats.pop();
-            return Init();
+            getCat();
         }
     }
-    else if (input == 3)
+    else if (input == 3)    // if user has no preference
     {
-        if (priority.front() == 1)
+        if (priority.front() == 1)  // if the first identifier of the queue is 1
         {
-            
-            cout << congrats << Dogs.front() << "\n";
-            cout << footer;
-            Dogs.pop();
-            return Init();
+            getDog();
 
 
         }
-        else if (priority.front() == 2) 
+        else if (priority.front() == 2) // if the first identifier of the queue is 2
         {
-            cout << congrats << Cats.front() << "\n";
-            cout << footer;
-            Cats.pop();
-            return Init();
+            getCat();
         }
 
     }
@@ -104,143 +89,19 @@ void Shelter::getAnimal() {
         
 }
 
-void Shelter::Init() {
-    int input;
-    string header = "============================= Welcome to the Allreach Shelter =================================\n";
-
-    //spalshScreen();
-    cout << header;
-    cout << "\t\t\t\tWhat would you like to do?\n"
-        "\tPress 1 to leave your animal at the shelter\tPress 2 to adopt an animal\n\tPress 3 to access animal lists\t\t\tPress 0 to exit\n";
-    cin >> input;
-
-    if (input == 1)
-    {
-        addAnimal();
-        cout << footer;
-        return Init();
-    }
-    else if (input == 2)
-    {
-        if (Dogs.empty() && Cats.empty())
-        {
-            cout << "Unfortunately there are no animal up for adoption at this moment, please come back later.\n"; 
-            cout << footer;
-            return Init();
-        }
-        else
-        {
-            getAnimal();
-            cout << footer;
-            return Init();
-        }
-            
-    }
-    else if (input == 0)
-    {
-        cout << "Thank you for visiting the shleter, we hope to see you again.\n";
-        exit(0);
-    }
-    else if (input == 3)
-    {
-        if (!Dogs.empty() && !Cats.empty())
-        {
-            getAnimalList();
-        }
-        else
-        {
-            cout << "There are no animals in the system at the moment, please check back later.\n" << footer;
-            return Init();
-        }
-        
-    }
-    else if (input)
-    {
-
-    }
-}
-
-void Shelter::getAnimalList()
+void Shelter::getDog()
 {
-    queue<string> duplicate;
-    cout << "Which animal list do you want to see?\n" << "Press 1 for dog's, press 2 for cat's\n";
-    cin >> input;
-    if (input == 1)
-    {
-        while (!Dogs.empty())
-        {
-            cout << Dogs.front() << "\t";
-            Dogs.pop();
-        }
-        cout << endl;
-    }
-    else if (input == 2)
-    {
-        while (!Cats.empty())
-        {
-            cout << Cats.front() << "\t";
-        }
-        cout << endl;
-    }
-    cout << "List printed successfully. Press 0 to return to menu.\n";
-    cin >> input;
-    if (input == 0)
-    {
-        return Init();
-    }
-
+    cout << adoptionMessage << Dogs.front() << "\n"; // get dog name from queue
+    cout << footer;
+    Dogs.pop(); // pop the name from the queue
+    priority.pop();// pop the matching identifier from the priority queue
 }
 
-void Shelter::spalshScreen() {
-    cout << 
-        "                                                .::.   :==-                    \n"
-        "                                               +%%%%#+#%%%%#:                  \n"
-        "                                              -%%%%%%%%%%%%%+                  \n"
-        "                                               *%%%%%%%%%%%#.                  \n"
-        "                                                 =#%%%%%%%#+.                  \n"
-        "                                 :=#*=.           :+#%%*=                      \n"
-        "                                -*######*-           ..                        \n"
-        "                            :+############=.    ----------                     \n"
-        "                        .=*################*=.  ##########                     \n"
-        "                     .-*########++############+-#########*                     \n"
-        "                   :+##########=:::=#####################+                     \n"
-        "                .-*############=::::-*###################=                     \n"
-        "              :+###############=::::::+##################-                     \n"
-        "           .=###########==*####=:::::::*#################=.                    \n"
-        "         :+##############=:=*##=::::::::###################+:                  \n"
-        "      :+##################-::=#=::::::::-+####################=.               \n"
-        "    -*####################*::::::::::::::::-*###################*-             \n"
-        " :=########################:::::::::::::::::::=*###################=.          \n"
-        " +########################*-:::::::::::::::::::::-+###################*        \n"
-        " :#######################=::::::::::::::::::-=-::::+##################:        \n"
-        "  -####################*-::::::::::::--::::-===:::::=################:         \n"
-        "   :##################*:::::::::::::::=-::-====-:::::-##############:          \n"
-        "    -###=#############-:::::::::::---===========:::::::*#######+###-           \n"
-        "     ::  *############+:::::::::--==============-:::::::=#####*-:              \n"
-        "         *###########=::::::::--=================-:::::::-*###*                \n"
-        "         *########*=:::::::::=====================:::::::::=##*                \n"
-        "         *#######=:::::::::::-=====================::::::::::+*                \n"
-        "         *#####+::::::::::::::-====================-:::::::::::                \n"
-        "         *###*-::::::::::::::::::-==================-::::::::::                \n"
-        "         *###*-:::::::::::::::::::::-================-:::::::::                \n"
-        "         +#####+-::::::::::::::::::::-==================-------                \n"
-        "         +#######+-:::::::--=++*+:::::========================-                \n"
-        "         +##########*++*#########:::::-=======================-                \n"
-        "         +#######################=:::::=======================-                \n"
-        "         =#######################*:::::-======================-                \n"
-        "         =########################-:::::-=====================-                \n"
-        "         =########################*::::::-====================-                \n"
-        "         =#########################-::::::-===================-                \n"
-        "         ..........................       ..........:::::::: : .               \n";
+void Shelter::getCat()
+{
+    cout << adoptionMessage << Cats.front() << "\n";   // get cat name from queue
+    cout << footer;
+    Cats.pop(); // pop the name from queue
+    priority.pop(); // pop the matching identifier from the priority queue
 }
-
-//bool Shelter::ERROR_CATCHING(const string& s)
-//{   
-//    for (int i = 0; i < s.length(); i++) {
-//        if (isdigit(s[i]) == false) {
-//            return false;
-//        }
-//        return true;
-//    }
-//}
 
